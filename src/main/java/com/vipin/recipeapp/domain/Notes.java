@@ -1,21 +1,20 @@
 package com.vipin.recipeapp.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"recipe"})
 @ToString(exclude = {"recipe"})
 public class Notes extends BaseEntity{
+    @Lob
     private String notes;
+
     @OneToOne
     private Recipe recipe;
 }

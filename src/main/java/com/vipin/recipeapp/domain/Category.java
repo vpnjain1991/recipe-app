@@ -1,7 +1,6 @@
 package com.vipin.recipeapp.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,10 +11,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString(exclude = {"recipe"})
+@ToString(exclude = {"recipes"})
 public class Category extends BaseEntity{
     private String name;
+
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 }
