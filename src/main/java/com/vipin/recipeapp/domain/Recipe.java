@@ -10,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = true)
 public class Recipe extends BaseEntity{
     private String name;
     private Integer prepTime;
