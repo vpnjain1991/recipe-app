@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @Setter
 @ToString
 public class UnitOfMeasure extends BaseEntity{
-    private String uom;
+    private String name;
 }
