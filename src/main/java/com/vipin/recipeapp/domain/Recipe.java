@@ -11,9 +11,10 @@ import java.util.Set;
 @Setter
 @ToString
 public class Recipe extends BaseEntity{
+    private String name;
     private Integer prepTime;
     private Integer cookTime;
-    private Integer serving;
+    private Integer servings;
     private String source;
     private String url;
 
