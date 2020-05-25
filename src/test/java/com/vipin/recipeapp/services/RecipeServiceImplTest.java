@@ -13,8 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class RecipeServiceImplTest {
@@ -78,5 +77,16 @@ class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeToRecipeCommand, times(1)).convert(any());
         verify(recipeCommandToRecipe, never()).convert(any());
+    }
+
+    @Test
+    void deleteByIdTest(){
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        recipeService.deleteById(1L);
+
+        assertThrows(RuntimeException.class, () -> recipeService.findById(1L));
+        verify(recipeRepository, times(1)).deleteById(1L);
     }
 }

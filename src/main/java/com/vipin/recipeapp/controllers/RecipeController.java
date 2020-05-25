@@ -2,6 +2,7 @@ package com.vipin.recipeapp.controllers;
 
 import com.vipin.recipeapp.commands.RecipeCommand;
 import com.vipin.recipeapp.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Slf4j
 public class RecipeController {
     private final RecipeService recipeService;
 
@@ -40,5 +42,12 @@ public class RecipeController {
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
         return  "recipe/recipeform";
+    }
+
+    @RequestMapping("recipe/{id}/deleteById")
+    public String deleteById(@PathVariable String id, Model model) {
+        log.debug("deleting recipe with id " + id);
+        recipeService.deleteById(Long.valueOf(id));
+        return "redirect:/";
     }
 }
