@@ -1,5 +1,6 @@
 package com.vipin.recipeapp.services;
 
+import com.vipin.recipeapp.commands.RecipeCommand;
 import com.vipin.recipeapp.converters.RecipeCommandToRecipe;
 import com.vipin.recipeapp.converters.RecipeToRecipeCommand;
 import com.vipin.recipeapp.domain.Recipe;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class RecipeServiceImplTest {
@@ -43,18 +45,38 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    public void findByIdTest()  {
-
+    void findByIdTest()  {
         Recipe recipe = new Recipe();
-        HashSet recipesData = new HashSet();
-        recipesData.add(recipe);
+        recipe.setId(1L);
 
-        when(recipeService.findAll()).thenReturn(recipesData);
+        when(recipeRepository.findById(1L)).thenReturn(java.util.Optional.of(recipe));
 
-        Set<Recipe> recipes = recipeService.findAll();
+        Recipe recipeReturned = recipeService.findById(1L);
 
-        assertEquals(recipes.size(), 1);
-        verify(recipeRepository, times(1)).findAll();
-        verify(recipeRepository, never()).findById(anyLong());
+        assertNotNull(recipeReturned);
+        verify(recipeRepository, times(1)).findById(1L);
+        verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    void findCommandByIdTest() {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.findById(1L)).thenReturn(java.util.Optional.of(recipe));
+
+        RecipeCommand command = new RecipeCommand();
+        command.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(command);
+
+        RecipeCommand commandReturned = recipeService.findCommandById(1L);
+
+        assertNotNull(commandReturned);
+        assertEquals(command.getId(), commandReturned.getId());
+        verify(recipeRepository, never()).findAll();
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeToRecipeCommand, times(1)).convert(any());
+        verify(recipeCommandToRecipe, never()).convert(any());
     }
 }
