@@ -16,16 +16,15 @@
 
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-6 offset-3">
-            <div class="panel panel-primary">
-
-                <div class="panel-heading">
-                    <h1 class="panel-title">My Recipes!</h1>
+            <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h5 class="card-title">My Recipes!</h5>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
-                        <table class="table ">
-                            <thead class="thead-dark">
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
