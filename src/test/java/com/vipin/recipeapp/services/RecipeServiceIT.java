@@ -45,7 +45,7 @@ public class RecipeServiceIT {
         //then
         assertEquals(NEW_NAME, savedRecipeCommand.getName());
         assertEquals(testRecipeCommand.getId(), savedRecipeCommand.getId());
-        assertEquals(testRecipeCommand.getCategories(), savedRecipeCommand.getCategories());
-        assertEquals(testRecipeCommand.getIngredients(), savedRecipeCommand.getIngredients());
+        assertEquals(testRecipeCommand.getCategories().size(), savedRecipeCommand.getCategories().size());
+        assertEquals(testRecipeCommand.getIngredients().size(), savedRecipeCommand.getIngredients().size());
     }
 }
